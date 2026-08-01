@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.rad.live/.well-known/oauth-authorization-server
+docs: https://developers.rad.live/docs/getting-started/authentication
+schemes:
+- name: OAuth2
+  source: https://api.rad.live/.well-known/oauth-authorization-server
+  pkce: S256
+  grant_types: [authorization_code, refresh_token]
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.rad.live/oauth/authorize
+    tokenUrl: https://api.rad.live/oauth/token
+scopes:
+- scope: mcp:tools
+  description: Access to the Rad TV MCP tool surface (34 tools) for delegated agent access
+  flows: [authorizationCode]
+  sources: [well-known/rad-oauth-authorization-server.json]
+notes:
+- >-
+  OAuth 2.1 delegated access is scoped for MCP clients. Direct API-key (Bearer)
+  access is unscoped and inherits the account's subscription-based permissions;
+  the GraphQL API itself does not advertise per-operation OAuth scopes.

@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.rad.live/docs/errors
+format: graphql-extensions
+envelope:
+  graphql: >-
+    errors[].extensions carries { code, errorType, field, suggestedFix,
+    documentation }. The documentation URL resolves to
+    https://developers.rad.live/docs/errors/<lowercase_code>.
+  rest: >-
+    errors[] carries { message, code, documentation }.
+error_codes:
+- code: UNAUTHENTICATED
+  title: Authentication credentials missing, invalid, or unverifiable
+  docs: https://developers.rad.live/docs/errors/unauthenticated
+- code: UNAUTHORIZED
+  title: Authenticated but lacking permission for the operation
+  docs: https://developers.rad.live/docs/errors/unauthorized
+- code: TOKEN_EXPIRED
+  title: The provided token is no longer valid because it expired
+  docs: https://developers.rad.live/docs/errors/token_expired
+- code: GRAPHQL_VALIDATION_FAILED
+  title: The GraphQL operation does not match the schema contract
+  docs: https://developers.rad.live/docs/errors/graphql_validation_failed
+- code: INVALID_INPUT
+  title: The request payload or parameter value is invalid
+  docs: https://developers.rad.live/docs/errors/invalid_input
+- code: FIELD_REQUIRED
+  title: A required input field is missing from the request
+  docs: https://developers.rad.live/docs/errors/field_required
+- code: RATE_LIMIT_EXCEEDED
+  title: The request exceeded configured rate-limit thresholds
+  remediation: Retry after the rate-limit window resets; use idempotent create patterns.
+  docs: https://developers.rad.live/docs/errors/rate_limit_exceeded
+- code: RESOURCE_NOT_FOUND
+  title: The requested resource does not exist or is not accessible
+  docs: https://developers.rad.live/docs/errors/resource_not_found
+- code: RESOURCE_ALREADY_EXISTS
+  title: The request conflicts with an existing resource
+  docs: https://developers.rad.live/docs/errors/resource_already_exists
+- code: TRANSCODE_FAILED
+  title: Media processing failed after submission to the transcoder
+  docs: https://developers.rad.live/docs/errors/transcode_failed
+- code: UPLOAD_FAILED
+  title: Upload ingestion failed before the media could be processed
+  docs: https://developers.rad.live/docs/errors/upload_failed
+- code: INTERNAL_SERVER_ERROR
+  title: An unexpected server-side failure occurred while processing the request
+  docs: https://developers.rad.live/docs/errors/internal_server_error
+- code: SERVICE_UNAVAILABLE
+  title: A required dependency or service is temporarily unavailable
+  docs: https://developers.rad.live/docs/errors/service_unavailable

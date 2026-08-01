@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.rad.live/docs
+standards:
+- id: graphql
+  conforms: true
+  evidence: strongly-typed GraphQL API at api.rad.live/graphql (introspectable, 224 types)
+- id: relay-connections
+  conforms: true
+  evidence: catalog/channels/comments list fields use Relay Connection/edges/node/pageInfo/cursor
+- id: oauth2
+  conforms: true
+  evidence: OAuth 2.1 authorizationCode flow (well-known/rad-oauth-authorization-server.json)
+- id: oauth2.1-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256]
+- id: rfc8414-oauth-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 authorization-server metadata
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://api.rad.live/oauth/register advertised
+- id: mcp
+  conforms: true
+  evidence: hosted MCP server at api.rad.live/mcp exposing 34 tools + rad-tv:// resources
+- id: tus-resumable-upload
+  conforms: true
+  evidence: uploads documented as TUS resumable upload sessions
+- id: did
+  conforms: true
+  evidence: all resources addressed by did:rad.live:<type>/<subtype>:<id> identifiers
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use GraphQL extensions envelope, not application/problem+json
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404; OAuth 2.1 without OIDC discovery

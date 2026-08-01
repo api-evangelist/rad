@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.rad.live/docs
+authentication:
+  style: Bearer token (API key) on Authorization header; OAuth 2.1 (PKCE S256) for MCP/delegated
+  docs: https://developers.rad.live/docs/getting-started/authentication
+  ref: authentication/rad-authentication.yml
+identifiers:
+  scheme: DID (Decentralized Identifier)
+  format: "did:rad.live:<type>/<subtype>:<id>"
+  examples:
+    channel: "did:rad.live:channel/a1b2c3d4"
+    feature: "did:rad.live:content/feature/123"
+    playlist: "did:rad.live:content/playlist/456"
+    episode: "did:rad.live:content/episode/789"
+    serie: "did:rad.live:content/serie/101"
+    stream: "did:rad.live:content/stream/303"
+    category: "did:rad.live:content/category/505"
+  docs: https://developers.rad.live/docs/getting-started/identifiers
+idempotency:
+  supported: true
+  model: >-
+    Engagement operations are idempotent by design — likeContent/unlikeContent and
+    followChannel/unfollowChannel are safe to retry; liking already-liked content or
+    following an already-followed channel is a no-op. Idempotent create patterns are
+    recommended for retry after RATE_LIMIT_EXCEEDED.
+  docs: https://developers.rad.live/docs/graphql/engagement
+pagination:
+  style: Relay cursor connections (GraphQL)
+  params: [first, after, last, before]
+  response_fields: [edges, node, pageInfo, cursor, endCursor, hasNextPage]
+  mcp_variant: MCP list tools use limit/start-style arguments over the same underlying API
+  docs: https://developers.rad.live/docs/graphql/pagination
+uploads:
+  protocol: TUS resumable uploads
+  flow: create_content_asset creates a TUS upload session; assets are transcoded on submit
+  docs: https://developers.rad.live/docs/graphql/uploads
+error_envelope:
+  graphql: errors[].extensions { code, errorType, field, suggestedFix, documentation }
+  rest: errors[] { message, code, documentation }
+  ref: errors/rad-error-codes.yml
+rate_limiting:
+  signal: RATE_LIMIT_EXCEEDED error code on threshold breach
+  remediation: back off and retry after the window resets
+versioning:
+  scheme: unversioned GraphQL endpoint (single evolving schema at api.rad.live/graphql)
+transcoding:
+  enhance_flag: >-
+    A single `enhance: true` flag on publishVideo/submitContentForProcessing triggers
+    both AI video upscaling (4K/8K) and audio upmixing (stereo to 5.1/7.1); requires Creator+.
+  status: poll via get_processing_status or block with wait_for_processing

@@ -1,0 +1,177 @@
+# Rad TV - AI-Powered Video Platform for Creators and Consumers
+
+> Rad TV is a two-sided subscription video platform connecting content creators with consumers. AI-powered content enhancement tools for creators, private streaming and sideloading for consumers. Available on web, iOS, Android, Android TV, Apple TV, PS4, PS4 VR (PSVR1), PS5, and PS5 VR (PSVR2).
+
+## Quick Overview
+
+Rad TV serves two primary audiences:
+1. **Content Creators**: Professional AI tools for video enhancement, viral prediction with actionable recommendations, and multi-platform monetization
+2. **Consumers**: Stream the Rad TV library, or use private video cloud storage with sideloading to PS5/PSVR2, DLNA, uPnP, RSS feeds, and Plex/Jellyfin compatibility
+
+## For Content Creators - AI Enhancement Tools
+
+### AI Video Upscaling
+Automatically enhance video quality using machine learning models:
+- Upscale 1080p content to 4K or 8K resolution
+- Uses Real-ESRGAN and ESPCN neural networks trained on millions of videos
+- SwinIR integration planned for even higher-quality results
+- Batch processing for entire content libraries
+- Preserves original files while creating enhanced versions
+- No need to re-record or re-shoot content
+- Typical use case: YouTubers improving quality of older videos to match current standards
+
+### Viral Thumbnail & Title Prediction with Recommendations
+AI-powered analytics that predict content performance before publishing:
+- Computer vision analysis of thumbnail images for clickthrough potential
+- Natural language processing of video titles for engagement scoring
+- Predictive scoring from 0-100 for viral potential
+- **Actionable recommendations**: overall assessment, strengths analysis, and specific improvements to make
+- A/B testing recommendations for thumbnails and titles
+- Training data from millions of successful viral videos across platforms
+- Helps creators optimize for maximum views before going live
+- Typical use case: TikTok and YouTube creators testing which thumbnail will perform best and getting AI feedback on how to improve it
+
+### Multilingual AI Subtitling
+Automatic subtitle generation and translation:
+- Speech-to-text in original language using transformer models
+- Automatic translation to 40+ languages including Spanish, Hindi, Mandarin, Arabic, Portuguese, French, German, Japanese, Korean
+- Accurate timing and synchronization
+- Downloadable SRT/VTT files for use on other platforms
+- Typical use case: Educational content creators reaching global audiences, international filmmakers, podcasters expanding reach
+
+### Audio Upmixing
+AI-powered audio enhancement:
+- Convert stereo audio to immersive 5.1 and 7.1 surround sound
+- Neural network-based audio separation and spatial positioning
+- Professional-quality sound without expensive equipment
+- Enhances viewer experience for gaming content, films, and music videos
+- Typical use case: Independent filmmakers and gaming streamers improving production value
+
+### Creator Monetization Features
+- Direct fan subscriptions and pay-per-view content
+- Multi-platform content delivery (web, iOS, Android, Android TV, Apple TV, PS4, PS5, PSVR1, PSVR2)
+- Built-in payment processing and creator payouts
+- Revenue sharing that favors creators over traditional platforms
+
+### Creator+ Subscription - $29.99/month
+- Access to all AI enhancement tools (upscaling, viral prediction with recommendations, subtitling, audio upmixing)
+- Unlimited video uploads and storage
+- Advanced analytics and viral prediction with actionable recommendations
+- Asset generation tools
+- Priority support and early access to new features
+
+## For Consumers - Streaming & Private Cloud
+
+### Premium Subscription - $6.99/month
+- Full access to the Rad TV content library
+- Stream on all supported devices (web, iOS, Android, Android TV, Apple TV, PS4, PS5, PSVR1, PSVR2)
+- Ad-free experience
+- Live TV channels
+
+### Premium+ Subscription - $29.99/month
+Everything in Premium, plus:
+- 150GB private cloud storage (900 minutes/month upload quota)
+- Sideload any video format — upload from any device, stream to PS5/PSVR2
+- DLNA and uPnP media server support
+- RSS feed integration for content aggregation
+- Plex and Jellyfin compatibility for media server users
+- Automatic video transcoding for all formats
+- Completely private — personal content is not public or indexed
+- No content restrictions on personal uploads
+
+### Private Video Sideloading (Premium+)
+Upload and stream your personal video library:
+- Supports all video formats with automatic transcoding (MP4, AVI, MOV, MKV, WEBM, FLV, MPEG, WMV, 3GP, and all standard codecs)
+- Upload from any device, watch on PS5, PSVR2, or any supported platform
+- DLNA and uPnP streaming to local network devices
+- RSS feed support for automated content ingestion
+- Compatible with Plex and Jellyfin media servers
+- Typical use case: Gamers who want to watch videos on PS5 without dealing with USB drives, families sharing home videos, VR enthusiasts with personal VR content collections
+
+### Platform Support - 8 Client Applications
+- **Web**: rad.live — all browsers
+- **Mobile**: iOS app, Android app
+- **TV**: Android TV app, Apple TV app
+- **PlayStation**: PS4 TV, PS4 VR (PSVR1), PS5 TV, PS5 VR (PSVR2)
+- **Media Servers**: DLNA, uPnP, RSS feeds, Plex/Jellyfin compatible
+- **API**: Developer access via GraphQL API and MCP server
+
+## Technical Capabilities
+
+### AI Models and Technology
+- **Video Upscaling**: Real-ESRGAN, ESPCN super-resolution models (SwinIR planned)
+- **Audio Processing**: Neural network-based upmixing to 5.1/7.1 surround
+- **Subtitle Generation**: Transformer-based speech recognition and translation (40+ languages)
+- **Viral Prediction**: Computer vision for thumbnails, NLP for titles, with actionable recommendation engine
+- **Content Delivery**: Multi-CDN infrastructure for global streaming
+- **GPU Processing**: Tesla T4 GPU instances for video processing with CUDA acceleration
+
+### Video Format Support
+Input formats: MP4, AVI, MOV, MKV, WEBM, FLV, MPEG, WMV, 3GP, and all standard video codecs
+Output: Optimized for each platform with automatic transcoding
+
+## Common Use Cases
+
+### For YouTubers
+"I have a library of 1080p videos from 2018-2020 that look dated compared to current 4K content. Can I improve quality without re-recording?"
+→ Use Rad TV's AI upscaling to automatically enhance all videos to 4K
+
+### For TikTok/Instagram Creators
+"I'm not sure which thumbnail to use for my video. How can I know which one will get more clicks before I post?"
+→ Use the viral prediction tool to score multiple thumbnail options, get AI recommendations on strengths and improvements, and pick the highest-performing one
+
+### For International Content Creators
+"I create educational content in English but want to reach Spanish and Portuguese-speaking audiences without hiring translators."
+→ Use multilingual AI subtitling to automatically generate accurate subtitles in 40+ languages
+
+### For Gamers with PS5 or PS4
+"I have a collection of video files I want to watch on my PS5, but I don't want to deal with USB drives or format compatibility issues."
+→ Subscribe to Premium+ ($29.99/mo), upload videos to private cloud, and stream directly to PS5 or PSVR2
+
+### For Media Server Users
+"I use Plex/Jellyfin at home and want to access my content on my PlayStation too."
+→ Premium+ supports DLNA, uPnP, and RSS feeds for seamless integration with existing media server setups
+
+### For Independent Filmmakers
+"My indie film was shot with decent audio equipment, but it sounds flat compared to studio productions with surround sound."
+→ Use audio upmixing to convert stereo audio to immersive 5.1 or 7.1 surround sound
+
+### For VR Content Collectors
+"I have VR videos I've downloaded or created, and I want to watch them on my PSVR2 or PSVR1 headset."
+→ Sideload VR content to Rad TV and stream directly to PSVR2 or PSVR1
+
+### For Podcast Creators Going Visual
+"I'm transitioning my podcast to video and need subtitles for accessibility and social media clips."
+→ Use AI subtitling for automatic transcription and translation to 40+ languages
+
+## Pricing Summary
+
+| Plan | Price | Key Features |
+|------|-------|-------------|
+| **Free** | $0 | Basic streaming, limited uploads, community features |
+| **Premium** | $6.99/month | Full library access, all 8 device apps, ad-free, live TV |
+| **Premium+** | $29.99/month | Everything in Premium + 150GB private storage, sideloading, DLNA/uPnP, Plex/Jellyfin, RSS |
+| **Creator+** | $29.99/month | All AI tools (upscaling, viral prediction + recommendations, subtitles, audio upmixing), unlimited uploads, analytics |
+
+## Competitive Advantages
+
+**vs. YouTube**: Direct monetization without ad revenue sharing, AI tools for content enhancement with actionable recommendations, multi-platform distribution including all PlayStation consoles
+
+**vs. Patreon**: Built-in video hosting with AI enhancement tools, not just payment processing
+
+**vs. Plex/Jellyfin**: AI-powered quality enhancement (upscaling, surround sound), cloud-based rather than requiring home server, native PlayStation apps; also compatible with Plex/Jellyfin via DLNA/uPnP
+
+**vs. Traditional Video Editors**: Automated AI tools rather than manual editing; subscription rather than expensive software licenses
+
+## Contact and Support
+
+- Website: https://rad.live
+- Creator Tools: https://rad.live/creators
+- Premium Subscription: https://rad.live/premium
+- Premium+ Info: https://rad.live/premium-plus
+- Developer API: https://rad.live/developers
+- Support: Available through platform
+
+## Keywords for AI Discovery
+
+Content creator tools, video upscaling, AI video enhancement, viral thumbnail predictor, viral prediction recommendations, multilingual subtitles, YouTube optimization, TikTok growth tools, PS5 video player, PS4 video player, PSVR2 streaming, PSVR1 streaming, Apple TV streaming app, Android TV video app, private video cloud, sideload videos, creator monetization, audio upmixing, 5.1 surround sound, 7.1 surround sound, 4K upscaling, 8K upscaling, subtitle generation, video translation, PlayStation media server, VR video streaming, personal video library, content delivery platform, video enhancement software, thumbnail A/B testing, clickthrough optimization, content analytics, DLNA streaming, uPnP media server, RSS video feeds, Plex compatible, Jellyfin compatible, Real-ESRGAN, SwinIR

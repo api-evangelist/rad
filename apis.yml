@@ -1,7 +1,22 @@
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
 aid: rad
 name: Rad.
-description: Rad. is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Rad TV (Rad.) is a two-sided subscription video platform connecting content
+  creators with consumers. For creators it offers AI-powered content enhancement
+  tools — video upscaling to 4K/8K (Real-ESRGAN/ESPCN), stereo-to-surround audio
+  upmixing, multilingual AI subtitling in 40+ languages, and viral thumbnail/title
+  prediction with actionable recommendations — plus multi-platform monetization.
+  For consumers it provides streaming plus private cloud storage with sideloading
+  to PS5/PSVR2, DLNA/uPnP, RSS, and Plex/Jellyfin compatibility across web, iOS,
+  Android, Android TV, Apple TV, and PlayStation. Developers build on the platform
+  through a strongly-typed GraphQL API (api.rad.live/graphql), a Model Context
+  Protocol (MCP) server exposing 34 agent tools, Bearer-token/API-key auth and
+  OAuth 2.1 (PKCE), TUS resumable uploads, and a full published documentation site.
 url: https://raw.githubusercontent.com/api-evangelist/rad/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,12 +24,65 @@ x-backed-by:
 - techstars
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://rad.live/rad-new-seo.jpg
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Video
+- Streaming
+- Creator Economy
+- Artificial Intelligence
+- Media
+- Monetization
+- GraphQL
+- MCP
+apis:
+- name: Rad TV GraphQL API
+  description: >-
+    Strongly-typed GraphQL API to query and mutate the Rad TV platform — catalog
+    (features, series, seasons, episodes, streams, miniseries), content management,
+    uploads (TUS resumable), transcoding with AI enhancement, playlists, engagement
+    (likes, comments, follows), identity, taxonomy, and bidirectional YouTube
+    cross-publishing. 23 queries and 28 mutations over a 224-type schema.
+  humanURL: https://developers.rad.live/docs/graphql
+  baseURL: https://api.rad.live/graphql
+  tags:
+  - GraphQL
+  - Video
+  - Media
+  properties:
+  - type: GraphQL
+    url: graphql/rad-api.graphql
+  - type: MCPServer
+    url: mcp/rad-mcp.yml
+  - type: Authentication
+    url: authentication/rad-authentication.yml
+  - type: OAuthScopes
+    url: scopes/rad-scopes.yml
+  - type: ErrorCatalog
+    url: errors/rad-error-codes.yml
+  - type: Conventions
+    url: conventions/rad-conventions.yml
+  - type: Idempotency
+    url: conventions/rad-conventions.yml
+  - type: DataModel
+    url: data-model/rad-data-model.yml
+  - type: Conformance
+    url: conformance/rad-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +91,29 @@ maintainers:
 common:
 - type: Website
   url: https://rad.live/
+- type: DeveloperPortal
+  url: https://developers.rad.live/
+- type: Documentation
+  url: https://developers.rad.live/docs
+- type: APIReference
+  url: https://developers.rad.live/docs/graphql/types
+- type: GettingStarted
+  url: https://developers.rad.live/docs/getting-started
+- type: Quickstart
+  url: https://developers.rad.live/docs/getting-started/quickstart
+- type: LLMsTxt
+  url: llms/rad-llms.txt
+- type: WellKnown
+  url: well-known/rad-well-known.yml
+- type: SignUp
+  url: https://rad.live/signup
+- type: Login
+  url: https://rad.live/login
+- type: Pricing
+  url: https://rad.live/premium
+- type: TermsOfService
+  url: https://business.rad.live/terms
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/rad-domain-security.yml

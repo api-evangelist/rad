@@ -1,0 +1,103 @@
+generated: '2026-07-20'
+method: derived
+source: graphql/rad-api.graphql (GraphQL introspection of api.rad.live/graphql)
+identifier_scheme:
+  format: "did:rad.live:<type>/<subtype>:<id>"
+  docs: https://developers.rad.live/docs/getting-started/identifiers
+entities:
+- name: Channel
+  did: "did:rad.live:channel/<id>"
+  description: A creator's channel; root owner of all content and playlists
+- name: Feature
+  did: "did:rad.live:content/feature/<id>"
+  description: A standalone video (the primary content type)
+- name: Serie
+  did: "did:rad.live:content/serie/<id>"
+  description: An episodic series grouping seasons
+- name: Season
+  did: "did:rad.live:content/season/<id>"
+  description: A season belonging to a series, grouping episodes
+- name: Episode
+  did: "did:rad.live:content/episode/<id>"
+  description: An episode within a season or miniseries
+- name: Miniseries
+  description: A short-form episodic grouping
+- name: Stream
+  did: "did:rad.live:content/stream/<id>"
+  description: A live or recorded stream
+- name: Playlist
+  did: "did:rad.live:content/playlist/<id>"
+  description: An ordered collection of content items
+- name: Comment
+  description: A user comment on a content item
+- name: Category
+  did: "did:rad.live:content/category/<id>"
+  description: Taxonomy category for content classification
+- name: Rating
+  description: Content maturity/rating classification
+- name: Genre
+  description: Content genre classification
+relationships:
+- from: Channel
+  to: Feature
+  type: has_many
+  via: features
+- from: Channel
+  to: Serie
+  type: has_many
+  via: series
+- from: Channel
+  to: Season
+  type: has_many
+  via: seasons
+- from: Channel
+  to: Episode
+  type: has_many
+  via: episodes
+- from: Channel
+  to: Stream
+  type: has_many
+  via: streams
+- from: Channel
+  to: Miniseries
+  type: has_many
+  via: miniseries
+- from: Channel
+  to: Playlist
+  type: has_many
+  via: playlists
+- from: Serie
+  to: Season
+  type: has_many
+  via: seasons
+- from: Season
+  to: Serie
+  type: belongs_to
+  via: associatedSeries
+- from: Season
+  to: Episode
+  type: has_many
+  via: episodes
+- from: Episode
+  to: Season
+  type: belongs_to
+  via: associatedSeason
+- from: Episode
+  to: Miniseries
+  type: belongs_to
+  via: associatedMiniseries
+- from: Playlist
+  to: PlaylistItem
+  type: has_many
+  via: items
+- from: Feature
+  to: Comment
+  type: has_many
+  via: comments
+- from: Comment
+  to: CommentAuthor
+  type: belongs_to
+  via: author
+notes:
+- Content types (Feature, Serie, Season, Episode, Stream) each expose likes (ContentLikes), comments (CommentConnection), assets (MediaAssets), and metadata.
+- List relationships are exposed as Relay Connection types (edges/node/pageInfo).

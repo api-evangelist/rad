@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: graphql/rad-api.graphql + https://developers.rad.live/docs
+skills:
+- file: rad-publish-enhanced-video.md
+  name: Publish an AI-enhanced video to Rad TV
+  api: graphql/rad-api.graphql
+  operations: [verifyConnection, publishVideo, submitContentForProcessing, waitForProcessing, publishContent]
+- file: rad-youtube-cross-publish.md
+  name: Cross-publish between Rad TV and YouTube
+  api: graphql/rad-api.graphql
+  operations: [createContentFromYouTube, importYouTubeAndPublish, importYouTubeLibrary, publishContentToYouTube, youtubePublishJob]
+- file: rad-predict-virality.md
+  name: Predict content virality before publishing
+  api: graphql/rad-api.graphql
+  operations: [predictVirality]

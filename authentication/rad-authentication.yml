@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.rad.live/docs/getting-started/authentication
+docs: https://developers.rad.live/docs/getting-started/authentication
+summary:
+  types: [http-bearer, apiKey, oauth2]
+  transport: Authorization Bearer header on every request
+  oauth2_flows: [authorizationCode]
+  oauth2_pkce: S256
+schemes:
+- name: BearerApiKey
+  type: http
+  scheme: bearer
+  description: >-
+    API keys are the primary credential. Include the key as a Bearer token
+    (Authorization: Bearer YOUR_API_KEY) on all GraphQL, MCP, and upload requests.
+    Generated from Developer Settings.
+  key_management: https://rad.live/edit-account/?activeTab=developer
+  use_for: Direct API access, scripts, server-side integrations
+- name: OAuth2
+  type: oauth2
+  description: >-
+    OAuth 2.1 with PKCE (S256) for MCP clients (Claude, Cursor, Windsurf) and
+    third-party apps needing delegated access. Supports Dynamic Client
+    Registration (RFC 7591) and RFC 8414 discovery.
+  discovery: https://api.rad.live/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.rad.live/oauth/authorize
+    tokenUrl: https://api.rad.live/oauth/token
+    registrationUrl: https://api.rad.live/oauth/register
+    revocationUrl: https://api.rad.live/oauth/revoke
+    scopes:
+      mcp:tools: Access to Rad TV MCP tools
+  use_for: MCP clients, third-party apps with delegated access
+notes:
+- All authenticated endpoints require an active subscription (Premium, Premium+, or Creator+).
+- verifyConnection query confirms auth is working and returns granted permissions.
+- endpoints:
+    graphql: POST https://api.rad.live/graphql
+    mcp: POST https://api.rad.live/mcp

@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/* on Rad TV hosts
+hosts:
+- host: https://api.rad.live
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: rad-oauth-authorization-server.json
+    note: RFC 8414 OAuth 2.1 authorization-server metadata (PKCE S256, DCR, scope mcp:tools)
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://rad.live
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://developers.rad.live
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

@@ -1,0 +1,153 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://developers.rad.live/docs/mcp/tools
+server:
+  name: rad-tv
+  transport: http
+  url: https://api.rad.live/mcp
+  auth: OAuth 2.1 (PKCE S256) or Bearer API key
+  scope: mcp:tools
+  machine_listing: https://api.rad.live/llms.txt
+  resources:
+  - rad-tv://manifest
+  - rad-tv:// (read-only resources)
+  clients:
+  - Claude
+  - Cursor
+  - Windsurf
+tool_count: 34
+tools:
+- name: get_me
+  category: Identity & User
+  description: Get the current authenticated user's profile, channel, subscription
+- name: list_followed_channels
+  category: Identity & User
+  description: List channels the current user follows
+- name: get_channel
+  category: Channels
+  arguments: [id]
+  description: Get a single channel by DID
+- name: list_channels
+  category: Channels
+  arguments: [limit, start]
+  description: Paginated list of all channels
+- name: list_categories
+  category: Taxonomy
+  arguments: [limit, start]
+  description: List content categories (auth required)
+- name: list_ratings
+  category: Taxonomy
+  arguments: [limit, start]
+  description: List content ratings
+- name: list_genres
+  category: Taxonomy
+  arguments: [limit, start]
+  description: List content genres
+- name: create_content
+  category: Content Creation
+  arguments: [title, summary, type]
+  description: Create a new content item
+- name: create_content_asset
+  category: Content Creation
+  arguments: [contentId, filename, size, hint]
+  description: Create a TUS upload session for a content asset
+- name: submit_content_for_processing
+  category: Content Creation
+  arguments: [contentId, assetName, layout, enhance]
+  description: Submit content for transcoding
+- name: publish_content
+  category: Publishing
+  arguments: [id, releaseDate]
+  description: Make content publicly visible
+- name: unpublish_content
+  category: Publishing
+  arguments: [id]
+  description: Revert content to protected
+- name: create_playlist
+  category: Playlists
+  arguments: [title, summary, channel]
+  description: Create an empty playlist
+- name: update_playlist
+  category: Playlists
+  arguments: [id, title, summary]
+  description: Update playlist metadata
+- name: create_playlist_asset
+  category: Playlists
+  arguments: [id, filename, size]
+  description: Create upload session for playlist cover
+- name: follow_channel
+  category: Engagement
+  arguments: [channel]
+  description: Follow a channel
+- name: unfollow_channel
+  category: Engagement
+  arguments: [channel]
+  description: Unfollow a channel
+- name: like_content
+  category: Engagement
+  arguments: [id]
+  description: Like content (idempotent)
+- name: unlike_content
+  category: Engagement
+  arguments: [id]
+  description: Unlike content (idempotent)
+- name: create_comment
+  category: Engagement
+  arguments: [contentId, body]
+  description: Create a comment on content
+- name: list_comments
+  category: Engagement
+  arguments: [contentId, limit, start]
+  description: List comments on content
+- name: list_youtube_videos
+  category: YouTube
+  arguments: [pageToken, limit]
+  description: List videos on connected YouTube channel
+- name: get_youtube_publish_job
+  category: YouTube
+  arguments: [id]
+  description: Get status of a YouTube publish job
+- name: create_content_from_youtube
+  category: YouTube
+  arguments: [videoId, channel]
+  description: Import YouTube video as Rad content
+- name: publish_content_to_youtube
+  category: YouTube
+  arguments: [id, privacyStatus]
+  description: Publish Rad content to YouTube
+- name: publish_video
+  category: Compound Workflows
+  arguments: [title, summary, channel, sourceUrl, filename, size, contentType, layout, enhance, publish, releaseDate, thumbnailUrl]
+  description: End-to-end video publishing
+- name: finalize_content_upload
+  category: Compound Workflows
+  arguments: [contentId, layout, enhance, publish, releaseDate]
+  description: Complete upload after Mode 2 publish_video
+- name: import_youtube_and_publish
+  category: Compound Workflows
+  arguments: [videoId, channel, publish]
+  description: Import from YouTube and publish in one call
+- name: create_playlist_with_items
+  category: Compound Workflows
+  arguments: [title, summary, channel, contentIds]
+  description: Create playlist with content
+- name: verify_connection
+  category: Compound Workflows
+  description: Agent hello — verify auth, channel, subscription, permissions
+- name: channel_dashboard
+  category: Compound Workflows
+  arguments: [channel]
+  description: Get channel info, recent content, playlists, transcode status
+- name: import_youtube_library
+  category: Compound Workflows
+  arguments: [maxResults, publishedAfter, autoPublish, channel]
+  description: Batch import from YouTube
+- name: wait_for_processing
+  category: Compound Workflows
+  arguments: [contentId, timeoutSeconds]
+  description: Block until transcode completes or times out
+- name: get_processing_status
+  category: Compound Workflows
+  arguments: [contentId]
+  description: Non-blocking transcode status check

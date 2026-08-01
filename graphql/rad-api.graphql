@@ -1,0 +1,1558 @@
+enum AnalyticsGranularity {
+  DAY
+  WEEK
+  MONTH
+}
+
+enum AnalyticsMetric {
+  VIEWS
+  WATCH_MINUTES
+  UNIQUE_VIEWERS
+  CHANNEL_SUBSCRIBERS
+  NEW_CHANNEL_SUBSCRIBERS
+}
+
+enum AnalyticsRange {
+  LAST_7D
+  LAST_28D
+  LAST_30D
+  LAST_90D
+  MTD
+  YTD
+  CUSTOM
+}
+
+enum ContentAdHint {
+  MAYBE
+  NO
+  YES
+}
+
+enum ContentCondition {
+  NONE
+  PRODUCT
+  PRODUCT_OR_SUBSCRIPTION
+  SUBSCRIPTION
+}
+
+enum ContentLayout {
+  LANDSCAPE
+  PORTRAIT
+  VR
+}
+
+enum ContentRatingSystem {
+  MPAA
+  MSO
+  TV
+  UNKNOWN
+  USA_PR
+}
+
+enum ContentType {
+  FEATURE
+  LIVE
+  SERIES
+  EPISODE
+  SHORT
+  ANY
+}
+
+enum CreatorVideoSort {
+  VIEWS
+  WATCH_MINUTES
+  UNIQUE_VIEWERS
+  LIKES
+  COMMENTS
+  RELEASE_DATE
+}
+
+enum EncoderType {
+  MEDIA_CONVERT
+  RAD_ENCODER
+}
+
+enum ImageFormat {
+  JPEG
+  PNG
+  WEBP
+  AVIF
+}
+
+enum ImagePresentationHint {
+  AVATAR
+  BACKGROUND
+  BANNER
+  EQUIRECTANGULAR
+  EQUIRECTANGULAR_180
+  EQUIRECTANGULAR_STEREOSCOPIC
+  EQUIRECTANGULAR_STEREOSCOPIC_180
+  EQUIRECTANGULAR_STEREOSCOPIC_SIDEBYSIDE
+  EQUIRECTANGULAR_STEREOSCOPIC_SIDEBYSIDE_180
+  EQUIRECTANGULAR_STILL
+  EQUIRECTANGULAR_STILL_180
+  ICON
+  LANDSCAPE
+  LOGO
+  NONE
+  PANORAMIC
+  PANORAMIC_STILL
+  PORTRAIT
+  PORTRAIT_STILL
+  POSTER
+  POSTER_STILL
+  SKYBOX
+  SPRITE
+  STEREOSCOPIC
+  STEREOSCOPIC_SIDEBYSIDE
+  STILL
+  THUMBNAIL
+  THUMBNAIL_STILL
+}
+
+enum ImagePurpose {
+  THUMBNAIL
+  POSTER
+  BANNER
+  AVATAR
+  SOCIAL_SHARE
+  BACKGROUND
+  EQUIRECTANGULAR
+  EQUIRECTANGULAR_STILL
+  OTHER
+}
+
+enum PlanInterval {
+  MONTHLY
+  ANNUAL
+}
+
+enum SubscriptionState {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  EXPIRED
+}
+
+enum TranscodeJobStatus {
+  CANCELLED
+  CANCELLING
+  COMPLETE
+  ERROR
+  IDLE
+  NONE
+  QUEUED
+  TRANSCODING
+  UNKNOWN
+}
+
+enum VideoContentType {
+  VR
+  LANDSCAPE_VIDEO
+  PORTRAIT_VIDEO
+  SHORT
+}
+
+enum VideoFormat {
+  HLS
+  DASH
+  MP4
+  WEBM
+}
+
+enum VideoPresentationHint {
+  CUBEMAP
+  CUBEMAP_STEREOSCOPIC
+  EQUIRECTANGULAR
+  EQUIRECTANGULAR_180
+  EQUIRECTANGULAR_STEREOSCOPIC
+  EQUIRECTANGULAR_STEREOSCOPIC_180
+  EQUIRECTANGULAR_STEREOSCOPIC_SIDEBYSIDE
+  EQUIRECTANGULAR_STEREOSCOPIC_SIDEBYSIDE_180
+  NONE
+  PORTRAIT
+  SQUARE
+  STEREOSCOPIC
+  STEREOSCOPIC_SIDEBYSIDE
+}
+
+enum YouTubePrivacyStatus {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum YouTubePublishStatus {
+  PENDING
+  UPLOADING
+  PROCESSING
+  COMPLETE
+  ERROR
+}
+
+input CategoryInput {
+  name: String!
+}
+
+input ContentAssetInput {
+  filename: String!
+  video: VideoInput
+  image: ImageInput
+  size: Int
+}
+
+input ContentGenreInput {
+  name: String!
+}
+
+input ContentHintInput {
+  type: ContentType!
+  containsAds: ContentAdHint!
+}
+
+input ContentInput {
+  hints: [ContentHintInput]!
+  metadata: ContentMetadataInput!
+}
+
+input ContentMetadataInput {
+  name: String
+  title: String
+  summary: String
+  genre: ContentGenreInput
+  rating: ContentRatingInput
+  shortSummary: String
+  keywords: [String]
+  categories: [CategoryInput]
+}
+
+input ContentRatingInput {
+  name: String!
+  system: ContentRatingSystem!
+}
+
+input CreatePlaylistWithItemsInput {
+  title: String!
+  summary: String
+  channel: DID
+  contentIds: [DID!]
+}
+
+input FinalizeContentUploadInput {
+  contentId: DID!
+  layout: ContentLayout
+  enhance: Boolean
+  publish: Boolean
+  releaseDate: DateTime
+}
+
+input GetChannelDashboardInput {
+  channel: DID
+}
+
+input ImageInput {
+  hint: ImagePresentationHint!
+}
+
+input ImportYouTubeAndPublishInput {
+  videoId: String!
+  channel: DID
+  publish: Boolean
+}
+
+input ImportYouTubeLibraryInput {
+  maxResults: Int
+  publishedAfter: DateTime
+  autoPublish: Boolean
+  channel: DID
+}
+
+input PlaylistAssetInput {
+  filename: String!
+  image: ImageInput
+  size: Int
+}
+
+input PlaylistInput {
+  metadata: PlaylistMetadataInput!
+}
+
+input PlaylistMetadataInput {
+  title: String
+  summary: String
+}
+
+input ProcessingInput {
+  assetName: String!
+  layout: ContentLayout
+  enhance: Boolean
+}
+
+input PublishVideoInput {
+  title: String!
+  summary: String
+  channel: DID
+  contentType: VideoContentType
+  sourceUrl: URL
+  filename: String
+  size: Int
+  videoHint: VideoPresentationHint
+  layout: ContentLayout
+  enhance: Boolean
+  publish: Boolean
+  releaseDate: DateTime
+}
+
+input VideoInput {
+  hint: VideoPresentationHint!
+}
+
+input ViralityPredictionInput {
+  title: String
+  imageUrl: String
+  description: String
+  category: String
+}
+
+input WaitForProcessingInput {
+  contentId: DID!
+  timeoutSeconds: Int
+}
+
+interface Commentable {
+  id: DID!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+}
+
+interface EntityMediaAssets {
+  videos: [VideoAsset!]!
+  images: [ImageAsset!]!
+}
+
+interface EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+}
+
+interface Followable {
+  id: DID!
+  followersCount: Int!
+  isFollowed: Boolean!
+}
+
+interface Likeable {
+  id: DID!
+  likes: ContentLikes!
+}
+
+interface MediaAssetBase {
+  url: URL!
+  width: Int!
+  height: Int!
+  mimeType: MimeType
+  sizeBytes: Int
+  id: ID
+  createdAt: DateTime
+}
+
+type AgentErrorMeta {
+  suggested_action: String!
+  related_tools: [String!]
+  common_cause: String
+  retry: Boolean!
+}
+
+type AnalyticsCountryBreakdown {
+  country: String
+  views: Int!
+  watchMinutes: Float
+  uniqueViewers: Int
+}
+
+type AnalyticsCountryDeviceCell {
+  country: String
+  deviceCategory: String
+  views: Int!
+}
+
+type AnalyticsCoverage {
+  sourcesIncluded: [String!]!
+  sourcesExcluded: [String!]!
+  reasonExcluded: String
+}
+
+type AnalyticsDeviceBreakdown {
+  deviceCategory: String
+  deviceGroup: String!
+  deviceSubtype: String
+  views: Int!
+  watchMinutes: Float
+  uniqueViewers: Int
+}
+
+type AnalyticsKPI {
+  value: Float
+  deltaVsPrevious: Float
+  deltaPct: Float
+  coverage: AnalyticsCoverage!
+}
+
+type AnalyticsRangeInfo {
+  start: Date!
+  end: Date!
+  days: Int!
+}
+
+type AnalyticsTimeseriesPoint {
+  date: Date!
+  value: Float
+}
+
+type Category {
+  id: DID!
+  createdAt: DateTime
+  structuredData: JSON
+  assets: MediaAssets!
+  metadata: CategoryMetadata!
+}
+
+type CategoryConnection {
+  edges: [CategoryEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CategoryEdge {
+  node: Category!
+  cursor: String!
+}
+
+type CategoryMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+}
+
+type Channel implements Followable {
+  id: DID!
+  assets: ChannelAssets!
+  metadata: ChannelMetadata!
+  playlists(first: Int, after: String, last: Int, before: String): PlaylistConnection!
+  features(first: Int, after: String, last: Int, before: String): FeatureConnection!
+  series(first: Int, after: String, last: Int, before: String): SerieConnection!
+  miniseries(first: Int, after: String, last: Int, before: String): MiniseriesConnection!
+  seasons(first: Int, after: String, last: Int, before: String): SeasonConnection!
+  episodes(first: Int, after: String, last: Int, before: String): EpisodeConnection!
+  streams(first: Int, after: String, last: Int, before: String): StreamConnection!
+  followersCount: Int!
+  isFollowed: Boolean!
+  analytics: CreatorAnalytics
+}
+
+type ChannelAssets implements EntityMediaAssets {
+  videos: [VideoAsset!]!
+  images: [ImageAsset!]!
+}
+
+type ChannelConnection {
+  edges: [ChannelEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ChannelDashboardResult {
+  channel: DashboardChannel!
+  recentContent: [DashboardContentItem!]!
+  playlists: [DashboardPlaylistItem!]!
+}
+
+type ChannelEdge {
+  node: Channel!
+  cursor: String!
+}
+
+type ChannelMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  categories: [Category]!
+}
+
+type Comment {
+  id: ID!
+  body: String!
+  contentId: DID!
+  createdAt: DateTime!
+  author: CommentAuthor
+}
+
+type CommentAuthor {
+  id: String!
+  username: String
+}
+
+type CommentConnection {
+  edges: [CommentEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+type Content implements Likeable & Commentable {
+  id: DID!
+  hints: [ContentHint]!
+  assets: ContentAssets!
+  outputAssets: OutputAssets
+  metadata: ContentMetadata!
+  transcodeJob: TranscodeJob
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+}
+
+type ContentAssets implements EntityMediaAssets {
+  videos: [VideoAsset!]!
+  images: [ImageAsset!]!
+}
+
+type ContentGenre {
+  name: String!
+}
+
+type ContentGenreConnection {
+  edges: [ContentGenreEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ContentGenreEdge {
+  node: ContentGenre!
+  cursor: String!
+}
+
+type ContentHint {
+  type: ContentType
+  containsAds: ContentAdHint
+  condition: ContentCondition
+}
+
+type ContentLikes {
+  count: Int!
+  isLiked: Boolean!
+}
+
+type ContentMetadata implements EntityMetadata {
+  name: String
+  title: String
+  genre: ContentGenre
+  rating: ContentRating
+  summary: String
+  shortSummary: String
+  duration: Float
+  keywords: [String]!
+  categories: [Category]!
+  visibility: String
+  releaseDate: DateTime
+}
+
+type ContentRating {
+  name: String!
+  system: ContentRatingSystem!
+}
+
+type ContentRatingConnection {
+  edges: [ContentRatingEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ContentRatingEdge {
+  node: ContentRating!
+  cursor: String!
+}
+
+type Continent {
+  name: String!
+  code: String!
+}
+
+type Country {
+  name: String!
+  code: String!
+  continent: Continent!
+}
+
+type CreatePlaylistWithItemsResult {
+  playlist: Playlist!
+  itemCount: Int!
+}
+
+type CreatorAnalytics {
+  overview(range: AnalyticsRange, from: Date, to: Date): CreatorOverview
+  audience(range: AnalyticsRange, from: Date, to: Date): CreatorAudience
+  timeseries(metric: AnalyticsMetric! = VIEWS, granularity: AnalyticsGranularity! = DAY, range: AnalyticsRange, from: Date, to: Date): CreatorTimeseries
+  subscribers(range: AnalyticsRange, from: Date, to: Date): CreatorSubscribers
+  videos(range: AnalyticsRange, from: Date, to: Date, sort: CreatorVideoSort = VIEWS, first: Int = 50, after: String): CreatorVideosConnection
+  video(contentLrn: String!, range: AnalyticsRange, from: Date, to: Date): CreatorVideoDetail
+  comments(first: Int = 25, after: String): CreatorCommentsConnection
+}
+
+type CreatorAudience {
+  channelUuid: String!
+  channelName: String
+  range: AnalyticsRangeInfo!
+  totalUniqueViewers: AnalyticsKPI!
+  channelSubscribers: AnalyticsKPI!
+  byCountry: [AnalyticsCountryBreakdown!]!
+  byDevice: [AnalyticsDeviceBreakdown!]!
+  byCountryDevice: [AnalyticsCountryDeviceCell!]!
+}
+
+type CreatorComment {
+  commentLrn: String!
+  body: String
+  isReply: Boolean!
+  createdAt: DateTime!
+  author: CreatorCommentAuthor!
+  contentLrn: String
+  contentTitle: String
+  contentType: String
+  deepLink: String
+}
+
+type CreatorCommentAuthor {
+  userLrn: String
+  userUuid: String
+  username: String
+  avatarUrl: String
+}
+
+type CreatorCommentsConnection {
+  items: [CreatorComment!]!
+  nextCursor: String
+}
+
+type CreatorOverview {
+  channelUuid: String!
+  channelName: String
+  range: AnalyticsRangeInfo!
+  previousRange: AnalyticsRangeInfo
+  views: AnalyticsKPI!
+  watchMinutes: AnalyticsKPI!
+  channelSubscribers: AnalyticsKPI!
+  uniqueViewers: AnalyticsKPI!
+  newChannelSubscribers: AnalyticsKPI!
+  topCountry: String
+  topDevice: String
+}
+
+type CreatorSubscribers {
+  channelUuid: String!
+  range: AnalyticsRangeInfo!
+  previousRange: AnalyticsRangeInfo
+  channelSubscribers: AnalyticsKPI!
+  newChannelSubscribers: AnalyticsKPI!
+  lostChannelSubscribers: AnalyticsKPI!
+  dailyNew: [AnalyticsTimeseriesPoint!]!
+  byRecency: CreatorSubscribersByRecency!
+  byCountry: [CreatorSubscribersByCountry!]!
+}
+
+type CreatorSubscribersByCountry {
+  country: String
+  subscribers: Int!
+}
+
+type CreatorSubscribersByRecency {
+  today: Int!
+  thisWeek: Int!
+  thisMonth: Int!
+  older: Int!
+}
+
+type CreatorTimeseries {
+  channelUuid: String!
+  metric: AnalyticsMetric!
+  granularity: AnalyticsGranularity!
+  range: AnalyticsRangeInfo!
+  points: [AnalyticsTimeseriesPoint!]!
+  coverage: AnalyticsCoverage!
+}
+
+type CreatorVideoDetail {
+  contentLrn: String!
+  contentUuid: String
+  contentType: String
+  title: String
+  shortTitle: String
+  summary: String
+  durationSeconds: Float
+  releaseDate: DateTime
+  channelUuid: String
+  channelName: String
+  range: AnalyticsRangeInfo!
+  previousRange: AnalyticsRangeInfo
+  views: AnalyticsKPI!
+  watchMinutes: AnalyticsKPI!
+  uniqueViewers: AnalyticsKPI!
+  avgWatchSecondsPerView: Float
+  likes: Int!
+  comments: Int!
+  dailyViews: [AnalyticsTimeseriesPoint!]!
+  dailyWatchMinutes: [AnalyticsTimeseriesPoint!]!
+  byCountry: [AnalyticsCountryBreakdown!]!
+  byDevice: [AnalyticsDeviceBreakdown!]!
+}
+
+type CreatorVideoListItem {
+  contentLrn: String!
+  contentUuid: String
+  contentType: String
+  title: String
+  releaseDate: DateTime
+  views: Int!
+  watchMinutes: Float
+  uniqueViewers: Int
+  avgWatchSecondsPerView: Float
+  likes: Int!
+  comments: Int!
+  topCountry: String
+  topDevice: String
+}
+
+type CreatorVideosConnection {
+  items: [CreatorVideoListItem!]!
+  totalCount: Int!
+  nextCursor: String
+}
+
+type CreditBalance {
+  balance: Int!
+  spent: Int!
+}
+
+type Credits {
+  generation: CreditBalance
+  storage: StorageBalance
+}
+
+type DashboardChannel {
+  id: DID!
+  name: String
+  followersCount: Int!
+}
+
+type DashboardContentItem {
+  id: DID!
+  title: String
+  visibility: String
+  processingStatus: String!
+  transcodeJob: TranscodeJob
+}
+
+type DashboardPlaylistItem {
+  id: DID!
+  title: String
+  itemCount: Int!
+}
+
+type Episode implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  associatedSeason: Season
+  associatedMiniseries: Miniseries
+  metadata: EpisodeMetadata!
+}
+
+type EpisodeConnection {
+  edges: [EpisodeEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EpisodeEdge {
+  node: Episode!
+  cursor: String!
+}
+
+type EpisodeMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  number: Int!
+  duration: Float
+  rating: ContentRating
+  isFinale: Boolean
+  isPremiere: Boolean
+}
+
+type Feature implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  embedUrl: URL
+  convertJobId: Int
+  metadata: FeatureMetadata!
+}
+
+type FeatureConnection {
+  edges: [FeatureEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type FeatureEdge {
+  node: Feature!
+  cursor: String!
+}
+
+type FeatureMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  duration: Float
+  rating: ContentRating
+  contentLayout: ContentLayout
+}
+
+type FollowChannelPayload {
+  ok: Boolean!
+}
+
+type FollowPayload {
+  ok: Boolean!
+  targetLrn: String!
+}
+
+type Image {
+  url: URL!
+  width: Int!
+  height: Int!
+  mimeType: MimeType
+  hint: ImagePresentationHint!
+}
+
+type ImageAsset implements MediaAssetBase {
+  id: ID
+  url: URL!
+  width: Int!
+  height: Int!
+  mimeType: MimeType
+  sizeBytes: Int
+  createdAt: DateTime
+  purpose: ImagePurpose!
+  alt: String
+  variants: [ImageVariant!]
+  dominantColor: String
+  blurhash: String
+}
+
+type ImageVariant {
+  url: URL!
+  width: Int!
+  height: Int!
+  format: ImageFormat
+}
+
+type ImportYouTubeAndPublishResult {
+  content: Content!
+  published: Boolean!
+}
+
+type ImportYouTubeLibraryResult {
+  imported: [YouTubeImportedItem!]!
+  skipped: [YouTubeSkippedItem!]!
+  nextPageToken: String
+}
+
+type InferredCategory {
+  category: String!
+  confidence: Float!
+}
+
+type IngestionProgress {
+  current: Int!
+  total: Int
+}
+
+type IngestionSession {
+  id: IngestionID!
+  tus: IngestionSessionTUSData!
+  endpoint: String!
+  metadata: IngestionSessionMetadata!
+  progress: IngestionProgress!
+}
+
+type IngestionSessionMetadata {
+  mimeType: MimeType
+  filename: String!
+  originalFilename: String!
+}
+
+type IngestionSessionTUSData {
+  filetype: String
+  filename: String!
+  initiator: String!
+  originalFilename: String!
+}
+
+type LikePayload {
+  ok: Boolean!
+  targetLrn: String!
+}
+
+type Me {
+  id: DID!
+  username: String!
+  email: String!
+  channel: Channel
+  ingestions: [IngestionSession]
+  ingestion(id: IngestionID!): IngestionSession
+  profile: UserProfile
+  settings: UserSettings
+  referralCode: String
+  followedChannels(first: Int, after: String, last: Int, before: String): ChannelConnection!
+  subscription: Subscription
+  credits: Credits
+  media: UserMedia
+  youtube: YouTubeConnection
+}
+
+type MediaAssets implements EntityMediaAssets {
+  videos: [VideoAsset!]!
+  images: [ImageAsset!]!
+}
+
+type Miniseries implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  episodes(first: Int, after: String, last: Int, before: String): EpisodeConnection!
+  metadata: MiniseriesMetadata!
+}
+
+type MiniseriesConnection {
+  edges: [MiniseriesEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MiniseriesEdge {
+  node: Miniseries!
+  cursor: String!
+}
+
+type MiniseriesMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  acl: String
+}
+
+type Mutation {
+  createContent(channel: DID, input: ContentInput!): Content!
+  updateContent(id: DID, input: ContentInput!): Content!
+  createContentAsset(id: DID!, input: ContentAssetInput!): IngestionSession
+  createPlaylist(channel: DID, input: PlaylistInput!): Playlist!
+  updatePlaylist(id: DID!, input: PlaylistInput!): Playlist!
+  createPlaylistAsset(id: DID!, input: PlaylistAssetInput!): IngestionSession
+  submitContentForProcessing(id: DID!, input: ProcessingInput!): ProcessingResult!
+  publishContent(id: DID!, releaseDate: DateTime): Content!
+  unpublishContent(id: DID!): Content!
+  likeContent(id: DID!): Content!
+  like(targetLrn: String!): LikePayload!
+  unlikeContent(id: DID!): Content!
+  unlike(targetLrn: String!): UnlikePayload!
+  followChannel(channel: DID!): FollowChannelPayload!
+  follow(targetLrn: String!): FollowPayload!
+  unfollowChannel(channel: DID!): UnfollowChannelPayload!
+  unfollow(targetLrn: String!): UnfollowPayload!
+  createComment(contentId: DID!, body: String!): Comment!
+  createCommentByLrn(targetLrn: String!, body: String!): Comment!
+  createContentFromYouTube(channel: DID, videoId: String!): Content!
+  publishContentToYouTube(id: DID!, privacyStatus: YouTubePrivacyStatus = PRIVATE): YouTubePublishJob!
+  predictVirality(input: ViralityPredictionInput!): ViralityPrediction!
+  publishVideo(input: PublishVideoInput!): PublishVideoResult!
+  finalizeContentUpload(input: FinalizeContentUploadInput!): PublishVideoResult!
+  importYouTubeAndPublish(input: ImportYouTubeAndPublishInput!): ImportYouTubeAndPublishResult!
+  createPlaylistWithItems(input: CreatePlaylistWithItemsInput!): CreatePlaylistWithItemsResult!
+  importYouTubeLibrary(input: ImportYouTubeLibraryInput): ImportYouTubeLibraryResult!
+  waitForProcessing(input: WaitForProcessingInput!): WaitForProcessingResult!
+}
+
+type OutputAssets {
+  encoderType: EncoderType!
+  video: OutputVideoAssets!
+  audio: OutputAudioAssets!
+  images: OutputImageAssets!
+  subtitles: OutputSubtitleAssets
+}
+
+type OutputAudioAssets {
+  download: URL!
+}
+
+type OutputImageAssets {
+  thumbnails: ThumbnailSet
+  videoThumbnails: ThumbnailSet
+}
+
+type OutputSubtitleAssets {
+  srt: URL!
+  vtt: URL!
+}
+
+type OutputVideoAssets {
+  hls: URL!
+  download: URL!
+  preview: URL
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Plan {
+  name: String!
+  price: Int!
+  interval: PlanInterval!
+}
+
+type Playlist {
+  id: DID!
+  assets: PlaylistAssets!
+  items(first: Int, after: String, last: Int, before: String): PlaylistItemConnection!
+  metadata: PlaylistMetadata!
+}
+
+type PlaylistAssets implements EntityMediaAssets {
+  videos: [VideoAsset!]!
+  images: [ImageAsset!]!
+}
+
+type PlaylistConnection {
+  edges: [PlaylistEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PlaylistEdge {
+  node: Playlist!
+  cursor: String!
+}
+
+type PlaylistItem {
+  id: DID!
+  index: Int!
+  content: Content!
+}
+
+type PlaylistItemConnection {
+  edges: [PlaylistItemEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PlaylistItemEdge {
+  node: PlaylistItem!
+  cursor: String!
+}
+
+type PlaylistMetadata implements EntityMetadata {
+  name: String!
+  title: String!
+  summary: String!
+  shortSummary: String!
+  keywords: [String]!
+}
+
+type ProcessingResult {
+  content: Content!
+  job: TranscodeJob!
+}
+
+type PublishVideoResult {
+  content: Content!
+  job: TranscodeJobInfo
+  published: Boolean!
+  upload: UploadInfo
+}
+
+type Query {
+  me: Me
+  channel(id: DID!): Channel
+  channels(first: Int, after: String, last: Int, before: String): ChannelConnection!
+  categories(first: Int, after: String, last: Int, before: String): CategoryConnection!
+  ratings(first: Int, after: String, last: Int, before: String): ContentRatingConnection!
+  genres(first: Int, after: String, last: Int, before: String): ContentGenreConnection!
+  comments(contentId: DID!, first: Int, after: String, last: Int, before: String): CommentConnection!
+  youtubeVideos(pageToken: String, limit: Int): YouTubeVideoList
+  youtubePublishJob(id: ID!): YouTubePublishJob
+  stream(id: DID!): Stream
+  streams(first: Int, after: String, last: Int, before: String): StreamConnection!
+  episode(id: DID!): Episode
+  episodes(first: Int, after: String, last: Int, before: String): EpisodeConnection!
+  miniserie(id: DID!): Miniseries
+  miniseries(first: Int, after: String, last: Int, before: String): MiniseriesConnection!
+  season(id: DID!): Season
+  seasons(first: Int, after: String, last: Int, before: String): SeasonConnection!
+  serie(id: DID!): Serie
+  series(first: Int, after: String, last: Int, before: String): SerieConnection!
+  feature(id: DID!): Feature
+  features(first: Int, after: String, last: Int, before: String): FeatureConnection!
+  verifyConnection: VerifyConnectionResult!
+  channelDashboard(input: GetChannelDashboardInput): ChannelDashboardResult!
+}
+
+type Resolution {
+  width: Int!
+  height: Int!
+  aspectRatio: String
+}
+
+type Season implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  associatedSeries: Serie
+  episodes(first: Int, after: String, last: Int, before: String): EpisodeConnection!
+  metadata: SeasonMetadata!
+}
+
+type SeasonConnection {
+  edges: [SeasonEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SeasonEdge {
+  node: Season!
+  cursor: String!
+}
+
+type SeasonMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  number: Int!
+}
+
+type Serie implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  seasons(first: Int, after: String, last: Int, before: String): SeasonConnection!
+  metadata: SerieMetadata!
+}
+
+type SerieConnection {
+  edges: [SerieEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SerieEdge {
+  node: Serie!
+  cursor: String!
+}
+
+type SerieMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  summaryShort: String
+}
+
+type StorageBalance {
+  storageBalance: Float!
+  storageSpent: Float!
+  uploadBalance: Float!
+  uploadSpent: Float!
+}
+
+type Stream implements Likeable & Commentable {
+  id: DID!
+  createdAt: DateTime
+  likes: ContentLikes!
+  commentCount: Int!
+  isCommented: Boolean!
+  comments(first: Int, after: String, last: Int, before: String): CommentConnection!
+  structuredData: JSON
+  assets: MediaAssets!
+  embedUrl: URL
+  metadata: StreamMetadata!
+}
+
+type StreamConnection {
+  edges: [StreamEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type StreamEdge {
+  node: Stream!
+  cursor: String!
+}
+
+type StreamMetadata implements EntityMetadata {
+  name: String
+  title: String
+  summary: String
+  shortSummary: String
+  keywords: [String]!
+  type: String
+  note: String
+  acl: String
+}
+
+type Subscription {
+  plan: Plan!
+  state: SubscriptionState!
+  billAt: DateTime
+  endsAt: DateTime
+  canceledAt: DateTime
+  trial: TrialInfo
+}
+
+type ThumbnailSet {
+  urlFormat: String!
+  count: Int!
+}
+
+type TranscodeJob {
+  id: ID!
+  status: TranscodeJobStatus!
+  progress: Float!
+  outputUrl: URL
+  deployed: Boolean!
+  finished: Boolean!
+  submittedAt: DateTime
+  startedAt: DateTime
+  completedAt: DateTime
+}
+
+type TranscodeJobInfo {
+  id: String!
+  status: String!
+  progress: Float
+  deployed: Boolean
+}
+
+type TrialInfo {
+  active: Boolean!
+  startedAt: DateTime
+  endsAt: DateTime
+  converted: Boolean
+}
+
+type UnfollowChannelPayload {
+  ok: Boolean!
+}
+
+type UnfollowPayload {
+  ok: Boolean!
+  targetLrn: String!
+}
+
+type UnlikePayload {
+  ok: Boolean!
+  targetLrn: String!
+}
+
+type UploadInfo {
+  endpoint: String!
+  assetName: String!
+  curlCommand: String!
+  contentId: DID!
+}
+
+type UserContent {
+  categories(first: Int, after: String, last: Int, before: String): CategoryConnection!
+  channels(first: Int, after: String, last: Int, before: String): ChannelConnection!
+}
+
+type UserImage {
+  id: ID!
+  name: String
+  url: URL
+  width: Int
+  height: Int
+  hint: String
+  createdAt: DateTime
+}
+
+type UserImageConnection {
+  edges: [UserImageEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserImageEdge {
+  node: UserImage!
+  cursor: String!
+}
+
+type UserMedia {
+  videos(first: Int, after: String, last: Int, before: String): UserVideoConnection
+  images(first: Int, after: String, last: Int, before: String): UserImageConnection
+}
+
+type UserProfile {
+  firstName: String
+  lastName: String
+  bio: String
+  avatarUrl: URL
+  confirmed: Boolean
+}
+
+type UserSettings {
+  emailNotifications: Boolean
+  doNotTrack: Boolean
+  emailNewsletter: Boolean
+}
+
+type UserSummary {
+  id: DID!
+  username: String!
+  avatarUrl: URL
+}
+
+type UserVideo {
+  id: ID!
+  name: String
+  url: URL
+  width: Int
+  height: Int
+  duration: Float
+  mime: String
+  deployed: Boolean
+  createdAt: DateTime
+}
+
+type UserVideoConnection {
+  edges: [UserVideoEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserVideoEdge {
+  node: UserVideo!
+  cursor: String!
+}
+
+type VerifyConnectionChannel {
+  id: DID!
+  name: String
+}
+
+type VerifyConnectionResult {
+  authenticated: Boolean!
+  user: VerifyConnectionUser!
+  channel: VerifyConnectionChannel
+  subscription: VerifyConnectionSubscription
+  permissions: [String!]!
+  youtubeConnected: Boolean!
+  serverVersion: String!
+}
+
+type VerifyConnectionSubscription {
+  plan: String
+  state: String
+}
+
+type VerifyConnectionUser {
+  id: DID!
+  username: String!
+  email: String!
+}
+
+type Video {
+  url: URL!
+  width: Int!
+  height: Int!
+  duration: Float
+  mimeType: MimeType
+  hint: VideoPresentationHint!
+}
+
+type VideoAsset implements MediaAssetBase {
+  id: ID
+  url: URL!
+  width: Int!
+  height: Int!
+  mimeType: MimeType
+  sizeBytes: Int
+  createdAt: DateTime
+  hint: VideoPresentationHint!
+  duration: Float
+  resolution: Resolution
+  playlistUrl: URL
+  format: VideoFormat
+  qualities: [VideoQuality!]
+}
+
+type VideoQuality {
+  label: String
+  resolution: Resolution
+  bitrate: Int
+  url: URL!
+}
+
+type ViralityImprovement {
+  area: String!
+  priority: String!
+  suggestion: String!
+  estimatedImpact: String
+}
+
+type ViralityPrediction {
+  viralityScore: Float!
+  predictedCtr: String!
+  recommendation: String!
+  confidence: Float!
+  processingTimeMs: Float!
+  bestCategory: String
+  inferredCategory: InferredCategory
+  recommendations: ViralityRecommendations
+}
+
+type ViralityRecommendations {
+  overallAssessment: String!
+  strengths: [String]!
+  improvements: [ViralityImprovement]!
+}
+
+type WaitForProcessingResult {
+  status: String!
+  job: TranscodeJobInfo
+  error: String
+}
+
+type YouTubeConnection {
+  connected: Boolean!
+  channelId: String
+  channelTitle: String
+  channelThumbnail: URL
+  connectedAt: DateTime
+  hasUploadScope: Boolean!
+}
+
+type YouTubeImportedItem {
+  youtubeId: String!
+  contentId: DID!
+  title: String
+  published: Boolean!
+}
+
+type YouTubePublishJob {
+  id: ID!
+  contentId: DID!
+  status: YouTubePublishStatus!
+  progress: Int
+  youtubeVideoId: String
+  youtubeUrl: URL
+  error: String
+  createdAt: DateTime!
+}
+
+type YouTubeSkippedItem {
+  youtubeId: String!
+  title: String
+  reason: String!
+}
+
+type YouTubeVideo {
+  videoId: String!
+  title: String!
+  description: String
+  tags: [String]
+  thumbnail: URL
+  publishedAt: DateTime
+  duration: String
+  viewCount: Long
+  channelTitle: String
+  studioUrl: URL!
+}
+
+type YouTubeVideoList {
+  videos: [YouTubeVideo]!
+  nextPageToken: String
+  totalResults: Int
+}
+
+scalar DID
+
+scalar Date
+
+scalar DateTime
+
+scalar IngestionID
+
+scalar JSON
+
+scalar Long
+
+scalar MimeType
+
+scalar Time
+
+scalar URL
+
+union ChannelAsset = ImageAsset
+
+union ContentAsset = VideoAsset | ImageAsset
+
+union PlaylistAsset = ImageAsset
